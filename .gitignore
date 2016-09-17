@@ -60,3 +60,6 @@ Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+/Plugins/MKUE4Utilities/Binaries/Win64
+/Plugins/MKUE4Utilities/Intermediate/Build/Win64/UE4Editor
+/MKUE4UtilitiesProj.VC.db

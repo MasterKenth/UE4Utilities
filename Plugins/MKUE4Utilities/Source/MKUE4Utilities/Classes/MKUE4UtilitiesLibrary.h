@@ -98,4 +98,7 @@ class UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Remove All Children", Keywords = "Clear Destroy Remove Kill Child Children"), Category = "MK Utilities")
 	static void RemoveAllChildren(USceneComponent* parentComp);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Is World Point Inside Box", Keywords = "World Point Inside Within Intersect Box"), Category = "MK Utilities")
+	static bool WorldPointIsInsideBox(const FVector& WorldPoint, const FVector& BoxCenter, const FVector& BoxExtents);
 };

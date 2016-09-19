@@ -306,3 +306,11 @@ void UMKUE4UtilityLibrary::RemoveAllChildren(USceneComponent* parentComp)
 		parentComp->GetChildComponent(0)->DestroyComponent();
 	}
 }
+
+bool UMKUE4UtilityLibrary::WorldPointIsInsideBox(const FVector& WorldPoint, const FVector& BoxCenter, const FVector& BoxExtents)
+{
+	return
+		(WorldPoint.X >= BoxCenter.X - BoxExtents.X) && (WorldPoint.X <= BoxCenter.X + BoxExtents.X) &&
+		(WorldPoint.Y >= BoxCenter.Y - BoxExtents.Y) && (WorldPoint.Y <= BoxCenter.Y + BoxExtents.Y) &&
+		(WorldPoint.Z >= BoxCenter.Z - BoxExtents.Z) && (WorldPoint.Z <= BoxCenter.Z + BoxExtents.Z);
+}

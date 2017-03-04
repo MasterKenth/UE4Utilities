@@ -314,3 +314,290 @@ bool UMKUE4UtilityLibrary::WorldPointIsInsideBox(const FVector& WorldPoint, cons
 		(WorldPoint.Y >= BoxCenter.Y - BoxExtents.Y) && (WorldPoint.Y <= BoxCenter.Y + BoxExtents.Y) &&
 		(WorldPoint.Z >= BoxCenter.Z - BoxExtents.Z) && (WorldPoint.Z <= BoxCenter.Z + BoxExtents.Z);
 }
+
+
+/** Easing functions */
+const float UMKUE4UtilityLibrary::EaseInterpolate(const EasingType EaseType, const float NormalizedTime, const float From, const float To)
+{
+	switch (EaseType)
+	{
+		default:
+		case ET_Linear: return EaseLinear(NormalizedTime, From, To);
+		case ET_SineIn: return EaseSineIn(NormalizedTime, From, To);
+		case ET_SineOut: return EaseSineOut(NormalizedTime, From, To);
+		case ET_SineInOut: return EaseSineInOut(NormalizedTime, From, To);
+		case ET_QuadIn: return EaseQuadIn(NormalizedTime, From, To);
+		case ET_QuadOut: return EaseQuadOut(NormalizedTime, From, To);
+		case ET_QuadInOut: return EaseQuadInOut(NormalizedTime, From, To);
+		case ET_CubicIn: return EaseCubicIn(NormalizedTime, From, To);
+		case ET_CubicOut: return EaseCubicOut(NormalizedTime, From, To);
+		case ET_CubicInOut: return EaseCubicInOut(NormalizedTime, From, To);
+		case ET_QuartIn: return EaseQuartIn(NormalizedTime, From, To);
+		case ET_QuartOut: return EaseQuartOut(NormalizedTime, From, To);
+		case ET_QuartInOut: return EaseQuartInOut(NormalizedTime, From, To);
+		case ET_QuintIn: return EaseQuintIn(NormalizedTime, From, To);
+		case ET_QuintOut: return EaseQuintOut(NormalizedTime, From, To);
+		case ET_QuintInOut: return EaseQuintInOut(NormalizedTime, From, To);
+		case ET_ExpoIn: return EaseExpoIn(NormalizedTime, From, To);
+		case ET_ExpoOut: return EaseExpoOut(NormalizedTime, From, To);
+		case ET_ExpoInOut: return EaseExpoInOut(NormalizedTime, From, To);
+		case ET_CircIn: return EaseCircIn(NormalizedTime, From, To);
+		case ET_CircOut: return EaseCircOut(NormalizedTime, From, To);
+		case ET_CircInOut: return EaseCircInOut(NormalizedTime, From, To);
+		case ET_BackIn: return EaseBackIn(NormalizedTime, From, To);
+		case ET_BackOut: return EaseBackOut(NormalizedTime, From, To);
+		case ET_BackInOut: return EaseBackInOut(NormalizedTime, From, To);
+		case ET_ElasticIn: return EaseElasticIn(NormalizedTime, From, To);
+		case ET_ElasticOut: return EaseElasticOut(NormalizedTime, From, To);
+		case ET_ElasticInOut: return EaseElasticInOut(NormalizedTime, From, To);
+		case ET_BounceIn: return EaseBounceIn(NormalizedTime, From, To);
+		case ET_BounceOut: return EaseBounceOut(NormalizedTime, From, To);
+		case ET_BounceInOut: return EaseBounceInOut(NormalizedTime, From, To);
+	}
+}
+
+const float UMKUE4UtilityLibrary::EaseLinear(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * NormalizedTime;
+}
+
+const float UMKUE4UtilityLibrary::EaseSineIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (FPlatformMath::Sin((NormalizedTime - 1) * HALF_PI) + 1);
+}
+
+const float UMKUE4UtilityLibrary::EaseSineOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (FPlatformMath::Sin(NormalizedTime * HALF_PI));
+}
+
+const float UMKUE4UtilityLibrary::EaseSineInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (0.5f * (1 - FPlatformMath::Cos(NormalizedTime * PI)));
+}
+
+const float UMKUE4UtilityLibrary::EaseQuadIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (NormalizedTime * NormalizedTime);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuadOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (-(NormalizedTime * (NormalizedTime - 2)));
+}
+
+const float UMKUE4UtilityLibrary::EaseQuadInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime < 0.5f) ? (2 * NormalizedTime * NormalizedTime) : ((-2 * NormalizedTime * NormalizedTime) + (4 * NormalizedTime) - 1));
+}
+
+const float UMKUE4UtilityLibrary::EaseCubicIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (NormalizedTime * NormalizedTime * NormalizedTime);
+}
+
+const float UMKUE4UtilityLibrary::EaseCubicOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) + 1);
+}
+
+const float UMKUE4UtilityLibrary::EaseCubicInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime < 0.5f) ? (4 * NormalizedTime * NormalizedTime * NormalizedTime) : (0.5f * ((2 * NormalizedTime) - 2) * ((2 * NormalizedTime) - 2) * ((2 * NormalizedTime) - 2) + 1));
+}
+
+const float UMKUE4UtilityLibrary::EaseQuartIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (NormalizedTime * NormalizedTime * NormalizedTime * NormalizedTime);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuartOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) * (1 - NormalizedTime) + 1);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuartInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime < 0.5f) ? (8 * NormalizedTime * NormalizedTime * NormalizedTime * NormalizedTime) : (-8 * (NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) + 1));
+}
+
+const float UMKUE4UtilityLibrary::EaseQuintIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (NormalizedTime * NormalizedTime * NormalizedTime * NormalizedTime * NormalizedTime);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuintOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) * (NormalizedTime - 1) + 1);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuintInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime < 0.5f) ? (16 * NormalizedTime * NormalizedTime * NormalizedTime * NormalizedTime * NormalizedTime) : (0.5f * ((2 * NormalizedTime) - 2) * ((2 * NormalizedTime) - 2) * ((2 * NormalizedTime) - 2) * ((2 * NormalizedTime) - 2) * ((2 * NormalizedTime) - 2) + 1));
+}
+
+const float UMKUE4UtilityLibrary::EaseExpoIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime <= 0.0f) ? (NormalizedTime) : (FPlatformMath::Pow(2, 10 * (NormalizedTime - 1))));
+}
+
+const float UMKUE4UtilityLibrary::EaseExpoOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime >= 1.0f) ? (NormalizedTime) : (1 - FPlatformMath::Pow(2, -10 * NormalizedTime)));
+}
+
+const float UMKUE4UtilityLibrary::EaseExpoInOut(const float NormalizedTime, const float From, const float To)
+{
+	if (NormalizedTime == 1.0f || NormalizedTime == 0.0f) return NormalizedTime;
+	return From + (To - From) * 
+		((NormalizedTime < 0.5f) ? 
+		(0.5f * FPlatformMath::Pow(2, (20 * NormalizedTime) - 10)) : 
+		 (-0.5f * FPlatformMath::Pow(2, (-20 * NormalizedTime) + 10) + 1)
+		 );
+}
+
+const float UMKUE4UtilityLibrary::EaseCircIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (1 - FPlatformMath::Sqrt(1 - (NormalizedTime * NormalizedTime)));
+}
+
+const float UMKUE4UtilityLibrary::EaseCircOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (FPlatformMath::Sqrt((2 - NormalizedTime) * NormalizedTime));
+}
+
+const float UMKUE4UtilityLibrary::EaseCircInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime < 0.5f) ? (0.5f * (1 - FPlatformMath::Sqrt(1 - 4 * (NormalizedTime * NormalizedTime)))) : (0.5f * (FPlatformMath::Sqrt(-((2 * NormalizedTime) - 3) * ((2 * NormalizedTime) - 1)) + 1)));
+}
+
+const float UMKUE4UtilityLibrary::EaseBackIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (NormalizedTime * NormalizedTime * NormalizedTime - NormalizedTime * FPlatformMath::Sin(NormalizedTime * PI));
+}
+
+const float UMKUE4UtilityLibrary::EaseBackOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (1 - ((1 - NormalizedTime) * (1 - NormalizedTime) * (1 - NormalizedTime) - (1 - NormalizedTime) * FPlatformMath::Sin((1 - NormalizedTime) * PI)));
+}
+
+const float UMKUE4UtilityLibrary::EaseBackInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * ((NormalizedTime < 0.5f) ? (0.5f * ((2 * NormalizedTime) * (2 * NormalizedTime) * (2 * NormalizedTime) - (2 * NormalizedTime) * FPlatformMath::Sin((2 * NormalizedTime) * PI))) : (0.5f * (1 - ((1 - (2 * NormalizedTime - 1)) * (1 - (2 * NormalizedTime - 1)) * (1 - (2 * NormalizedTime - 1)) - (1 - (2 * NormalizedTime - 1)) * FPlatformMath::Sin((1 - (2 * NormalizedTime - 1)) * PI))) + 0.5f));
+}
+
+const float UMKUE4UtilityLibrary::EaseElasticIn(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (FPlatformMath::Sin(13 * HALF_PI * NormalizedTime) * FPlatformMath::Pow(2, 10 * (NormalizedTime - 1)));
+}
+
+const float UMKUE4UtilityLibrary::EaseElasticOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (FPlatformMath::Sin(-13 * HALF_PI * (NormalizedTime + 1)) * FPlatformMath::Pow(2, -10 * NormalizedTime) + 1);
+}
+
+const float UMKUE4UtilityLibrary::EaseElasticInOut(const float NormalizedTime, const float From, const float To)
+{
+	return From + (To - From) * (
+		(NormalizedTime < 0.5f) ? 
+		(0.5f * FPlatformMath::Sin(13 * HALF_PI * (2 * NormalizedTime)) * FPlatformMath::Pow(2, 10 * ((2 * NormalizedTime) - 1))) : 
+		(0.5f* (FPlatformMath::Sin(-13 * HALF_PI * ((2 * NormalizedTime - 1) + 1)) * FPlatformMath::Pow(2, -10 * (2 * NormalizedTime - 1)) + 2)
+		 ));
+}
+
+const float UMKUE4UtilityLibrary::EaseBounceIn(const float NormalizedTime, const float From, const float To)
+{
+	float p = (1 - NormalizedTime);
+	float x;
+	if (p < 4 / 11.0f)
+	{
+		x = (121 * p * p) / 16.0f;
+	}
+	else if (p < 8 / 11.0f)
+	{
+		x = (363 / 40.0f * p * p) - (99 / 10.0f * p) + 17 / 5.0f;
+	}
+	else if (p < 9 / 10.0f)
+	{
+		x = (4356 / 361.0f * p * p) - (35442 / 1805.0f * p) + 16061 / 1805.0f;
+	}
+	else
+	{
+		x = (54 / 5.0f * p * p) - (513 / 25.0f * p) + 268 / 25.0f;
+	}
+
+	return From + (To - From) * (1 - (1 - x));
+}
+
+const float UMKUE4UtilityLibrary::EaseBounceOut(const float NormalizedTime, const float From, const float To)
+{
+	float p = NormalizedTime;
+	float x;
+	if (p < 4 / 11.0f)
+	{
+		x = (121 * p * p) / 16.0f;
+	}
+	else if (p < 8 / 11.0f)
+	{
+		x = (363 / 40.0f * p * p) - (99 / 10.0f * p) + 17 / 5.0f;
+	}
+	else if (p < 9 / 10.0f)
+	{
+		x = (4356 / 361.0f * p * p) - (35442 / 1805.0f * p) + 16061 / 1805.0f;
+	}
+	else
+	{
+		x = (54 / 5.0f * p * p) - (513 / 25.0f * p) + 268 / 25.0f;
+	}
+	return From + (To - From) * (x);
+}
+
+const float UMKUE4UtilityLibrary::EaseBounceInOut(const float NormalizedTime, const float From, const float To)
+{
+	float x;
+
+	if (NormalizedTime < 0.5f)
+	{
+		float p = (NormalizedTime * 2);
+		if (p < 4 / 11.0f)
+		{
+			x = (121 * p * p) / 16.0f;
+		}
+		else if (p < 8 / 11.0f)
+		{
+			x = (363 / 40.0f * p * p) - (99 / 10.0f * p) + 17 / 5.0f;
+		}
+		else if (p < 9 / 10.0f)
+		{
+			x = (4356 / 361.0f * p * p) - (35442 / 1805.0f * p) + 16061 / 1805.0f;
+		}
+		else
+		{
+			x = (54 / 5.0f * p * p) - (513 / 25.0f * p) + 268 / 25.0f;
+		}
+		x = 0.5f * x;
+	}
+	else
+	{
+		float p = (NormalizedTime * 2 - 1);
+		if (p < 4 / 11.0f)
+		{
+			x = (121 * p * p) / 16.0f;
+		}
+		else if (p < 8 / 11.0f)
+		{
+			x = (363 / 40.0f * p * p) - (99 / 10.0f * p) + 17 / 5.0f;
+		}
+		else if (p < 9 / 10.0f)
+		{
+			x = (4356 / 361.0f * p * p) - (35442 / 1805.0f * p) + 16061 / 1805.0f;
+		}
+		else
+		{
+			x = (54 / 5.0f * p * p) - (513 / 25.0f * p) + 268 / 25.0f;
+		}
+		x = 0.5f * x + 0.5f;
+	}
+
+	return From + (To - From) * x;
+}

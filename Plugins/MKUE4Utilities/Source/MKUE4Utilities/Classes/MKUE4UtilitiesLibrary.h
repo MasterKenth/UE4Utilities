@@ -3,6 +3,42 @@
 #include "Engine.h"
 #include "MKUE4UtilitiesLibrary.generated.h"
 
+UENUM(BlueprintType)
+enum EasingType
+{
+	ET_Linear UMETA(DisplayName = "Linear"),
+	ET_SineIn UMETA(DisplayName = "Sine In"),
+	ET_SineOut UMETA(DisplayName = "Sine Out"),
+	ET_SineInOut UMETA(DisplayName = "Sine In Out"),
+	ET_QuadIn UMETA(DisplayName = "Quad In"),
+	ET_QuadOut UMETA(DisplayName = "Quad Out"),
+	ET_QuadInOut UMETA(DisplayName = "Quad In Out"),
+	ET_CubicIn UMETA(DisplayName = "Cubic In"),
+	ET_CubicOut UMETA(DisplayName = "Cubic Out"),
+	ET_CubicInOut UMETA(DisplayName = "Cubic In Out"),
+	ET_QuartIn UMETA(DisplayName = "Quartic In"),
+	ET_QuartOut UMETA(DisplayName = "Quartic Out"),
+	ET_QuartInOut UMETA(DisplayName = "Quartic In Out"),
+	ET_QuintIn UMETA(DisplayName = "Quintic In"),
+	ET_QuintOut UMETA(DisplayName = "Quintic Out"),
+	ET_QuintInOut UMETA(DisplayName = "Quintic In Out"),
+	ET_ExpoIn UMETA(DisplayName = "Exponential In"),
+	ET_ExpoOut UMETA(DisplayName = "Exponential Out"),
+	ET_ExpoInOut UMETA(DisplayName = "Exponential In Out"),
+	ET_CircIn UMETA(DisplayName = "Circular In"),
+	ET_CircOut UMETA(DisplayName = "Circular Out"),
+	ET_CircInOut UMETA(DisplayName = "Circular In Out"),
+	ET_BackIn UMETA(DisplayName = "Back In"),
+	ET_BackOut UMETA(DisplayName = "Back Out"),
+	ET_BackInOut UMETA(DisplayName = "Back In Out"),
+	ET_ElasticIn UMETA(DisplayName = "Elastic In"),
+	ET_ElasticOut UMETA(DisplayName = "Elastic Out"),
+	ET_ElasticInOut UMETA(DisplayName = "Elastic In Out"),
+	ET_BounceIn UMETA(DisplayName = "Bounce In"),
+	ET_BounceOut UMETA(DisplayName = "Bounce Out"),
+	ET_BounceInOut UMETA(DisplayName = "Bounce In Out")
+};
+
 UCLASS()
 class UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 {
@@ -15,9 +51,11 @@ class UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 
 	public:
 
+	/** Wildcard functions */
 	UFUNCTION(BlueprintCallable, CustomThunk, meta = (DisplayName = "Shuffle by Stream", CompactNodeTitle = "SHUFFLESTREAM", ArrayParm = "TargetArray"), Category = "MK Utilities")
 	static void ShuffleArrayWithStream(const TArray<int32>& TargetArray, const FRandomStream& Stream); // Stub function
 
+	/** Wildcard thunks */
 	DECLARE_FUNCTION(execShuffleArrayWithStream)
 	{
 		Stack.MostRecentProperty = nullptr;
@@ -38,6 +76,7 @@ class UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 
 		ShuffleArrayWithStream_impl(ArrayAddr, ArrayProperty, Stream);
 	}
+	
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Mouse Position", Keywords = "Set Mouse Position"), Category = "MK Utilities")
 	static bool SetMousePosition(APlayerController* PC, const float& PosX, const float& PosY);
@@ -99,6 +138,105 @@ class UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Remove All Children", Keywords = "Clear Destroy Remove Kill Child Children"), Category = "MK Utilities")
 	static void RemoveAllChildren(USceneComponent* parentComp);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Is World Point Inside Box", Keywords = "World Point Inside Within Intersect Box"), Category = "MK Utilities")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Is World Point Inside Box", Keywords = "World Point Inside Within Intersect Box"), Category = "MK Utilities")
 	static bool WorldPointIsInsideBox(const FVector& WorldPoint, const FVector& BoxCenter, const FVector& BoxExtents);
+
+
+	/** Easing functions */
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseInterpolate(const EasingType EaseType, const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseLinear(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseSineIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseSineOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseSineInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuadIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuadOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuadInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseCubicIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseCubicOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseCubicInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuartIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuartOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuartInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuintIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuintOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseQuintInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseExpoIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseExpoOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseExpoInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseCircIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseCircOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseCircInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseBackIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseBackOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseBackInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseElasticIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseElasticOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseElasticInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseBounceIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseBounceOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+	static const float EaseBounceInOut(const float NormalizedTime, const float From, const float To);
 };

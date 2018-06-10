@@ -1,5 +1,7 @@
 #include "MKUE4UtilitiesLibrary.h"
 //#include "MKUE4UtilitiesPrivatePCH.h"
+#include "CoreUObject.h"
+#include "MKUE4Utilities.h"
 #include "Runtime/UMG/Public/Blueprint/WidgetLayoutLibrary.h"
 
 void UMKUE4UtilityLibrary::ShuffleArrayWithStream(const TArray<int32>& TargetArray, const FRandomStream& Stream)

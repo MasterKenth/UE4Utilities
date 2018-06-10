@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 5,
-	"VersionName": "1.1",
+	"Version": 6,
+	"VersionName": "1.2.19",
 	"FriendlyName": "MK's UE4 Utilities",
 	"Description": "Personal UE4 utilities library",
 	"Category": "Misc",
@@ -17,8 +17,16 @@
 	"Modules": [
 		{
 			"Name": "MKUE4Utilities",
-			"Type": "Developer",
-			"LoadingPhase": "Default"
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32",
+				"Android"
+			],
+			"BlacklistPlatforms": [
+				"IOS"
+			]
 		}
 	]
 }

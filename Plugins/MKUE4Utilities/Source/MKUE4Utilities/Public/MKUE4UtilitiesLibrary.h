@@ -40,7 +40,7 @@ enum EasingType
 };
 
 UCLASS()
-class UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
+class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 

@@ -6,7 +6,7 @@
 
 #define LOCTEXT_NAMESPACE "FMKUE4UtilitiesModule"
 
-DEFINE_LOG_CATEGORY(MKUE4UtilitiesLog)
+DEFINE_LOG_CATEGORY(MKUE4UtilitiesLog);
 
 void FMKUE4UtilitiesModule::StartupModule()
 {

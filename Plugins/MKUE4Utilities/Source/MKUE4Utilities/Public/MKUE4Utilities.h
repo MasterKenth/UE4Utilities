@@ -4,7 +4,7 @@
 
 #include "ModuleManager.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(MKUE4UtilitiesLog, Log, All)
+DECLARE_LOG_CATEGORY_EXTERN(MKUE4UtilitiesLog, Log, All);
 
 class FMKUE4UtilitiesModule : public IModuleInterface
 {

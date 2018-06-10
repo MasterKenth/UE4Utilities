@@ -30,10 +30,9 @@ public class MKUE4Utilities : ModuleRules
 				"Core",
                 "CoreUObject",
                 "Engine",
-                "Kismet",
                 "UMG",
-                "InputCore",
-				// ... add other public dependencies that you statically link with here ...
+                //"Kismet",
+                //"InputCore",
 			}
 			);
 			
@@ -41,15 +40,14 @@ public class MKUE4Utilities : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
             {
-                "Core",
-                "CoreUObject",
-				"Engine",
-                "Kismet",
-                "UMG",
-                "InputCore",
-                "Slate",
-				"SlateCore",
-				// ... add private dependencies that you statically link with here ...	
+                //"Core",
+                //"CoreUObject",
+				//"Engine",
+                //"UMG",
+                //"Kismet",
+                //"InputCore",
+                //"Slate",
+				//"SlateCore",
 			}
 			);
 		

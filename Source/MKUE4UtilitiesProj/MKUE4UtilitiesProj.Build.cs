@@ -4,8 +4,9 @@ using UnrealBuildTool;
 
 public class MKUE4UtilitiesProj : ModuleRules
 {
-	public MKUE4UtilitiesProj(TargetInfo Target)
+	public MKUE4UtilitiesProj(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

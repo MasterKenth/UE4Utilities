@@ -4,8 +4,9 @@ using UnrealBuildTool;
 
 public class MKUE4Utilities : ModuleRules
 {
-	public MKUE4Utilities(TargetInfo Target)
+	public MKUE4Utilities(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {

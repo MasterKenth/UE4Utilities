@@ -5,21 +5,9 @@ using System.Collections.Generic;
 
 public class MKUE4UtilitiesProjTarget : TargetRules
 {
-	public MKUE4UtilitiesProjTarget(TargetInfo Target)
+	public MKUE4UtilitiesProjTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-	}
-
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "MKUE4UtilitiesProj" } );
+		ExtraModuleNames.AddRange( new string[] { "MKUE4UtilitiesProj" } );
 	}
 }

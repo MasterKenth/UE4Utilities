@@ -604,10 +604,15 @@ const float UMKUE4UtilityLibrary::EaseBounceInOut(const float NormalizedTime, co
 	return From + (To - From) * x;
 }
 
-
-void UMKUE4UtilityLibrary::TweenCustom(const EEasingType EaseType, float Duration, const FMKTweenFunction& TweenFunction)
+int32 UMKUE4UtilityLibrary::TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenFunction& TweenFunction)
 {
-	UMKTweenManager::Get().AddTween(FMKTweenDataStruct(EaseType, Duration, TweenFunction));
+	FMKTweenDataStruct data(EaseType, Duration, From, To, TweenFunction);
+	return UMKTweenManager::Get().AddTween(data);
+}
+
+void UMKUE4UtilityLibrary::StopTween(int32 TweenID)
+{
+	UMKTweenManager::Get().StopTween(TweenID);
 }
 
 template<typename T>
@@ -641,9 +646,11 @@ void UMKTweenManager::Tick(float DeltaTime)
 		}
 
 		float newElapsedTime = FMath::Min(data.Duration, data.ElapsedTime + DeltaTime);
-		data.ElapsedTime = newElapsedTime;
 		float t = UMKUE4UtilityLibrary::EaseInterpolate(data.EaseType, newElapsedTime / data.Duration, 0.0f, 1.0f);
-		data.TweenFunction.Execute(t);
+		float val = FMath::Lerp(data.From, data.To, t);
+
+		data.ElapsedTime = newElapsedTime;
+		data.TweenFunction.Execute(val);
 
 		if (newElapsedTime >= data.Duration)
 		{
@@ -679,9 +686,25 @@ UWorld* UMKTweenManager::GetWorld() const
 	return GetOuter()->GetWorld();
 }
 
-void UMKTweenManager::AddTween(const FMKTweenDataStruct& NewTween)
+int32 UMKTweenManager::AddTween(FMKTweenDataStruct& NewTween)
 {
+	NewTween.TweenID = TweenCounter++;
 	ActiveTweens.Add(NewTween);
+	return TweenCounter - 1;
+}
+
+void UMKTweenManager::StopTween(int32 TweenID)
+{
+	for (int32 i = 0; i < ActiveTweens.Num(); i++)
+	{
+		if (ActiveTweens[i].TweenID == TweenID)
+		{
+			ActiveTweens.RemoveAt(i);
+			return;
+		}
+	}
+
+	UE_LOG(MKUE4UtilitiesLog, Log, TEXT("Unable to find tween with id %d (might have expired)"), TweenID);
 }
 
 UMKTweenManager* UMKTweenManager::Instance;

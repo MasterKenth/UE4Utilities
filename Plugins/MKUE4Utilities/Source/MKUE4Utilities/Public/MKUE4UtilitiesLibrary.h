@@ -39,7 +39,7 @@ enum class EEasingType : uint8
 	BounceInOut UMETA(DisplayName = "Bounce In Out")
 };
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FMKTweenFunction, float, NormalizedTime);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FMKTweenFunction, float, TweenedValue);
 
 UCLASS()
 class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
@@ -242,8 +242,10 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 	static const float EaseBounceInOut(const float NormalizedTime, const float From, const float To);
 
 	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween"/*, meta = (WorldContext = "WorldContextObject")*/)
-	static void TweenCustom(const EEasingType EaseType, float Duration, const FMKTweenFunction& TweenFunction);
+	static int32 TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenFunction& TweenFunction);
 
+	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween")
+	static void StopTween(int32 TweenID);
 
 	/** C++ only functions */
 
@@ -262,12 +264,23 @@ public:
 	{
 	}
 
-	FMKTweenDataStruct(EEasingType EaseType, float Duration, FMKTweenFunction TweenFunction)
-		: EaseType(EaseType),
+	FMKTweenDataStruct(EEasingType EaseType, float Duration, float From, float To, FMKTweenFunction TweenFunction)
+		: TweenID(-1),
+		EaseType(EaseType),
 		Duration(Duration),
+		From(From),
+		To(To),
 		TweenFunction(TweenFunction)
 	{
 	}
+
+	FORCEINLINE bool operator==(const FMKTweenDataStruct& Other) const
+	{
+		return Other.TweenID == TweenID;
+	}
+
+	UPROPERTY()
+	int32 TweenID;
 
 	UPROPERTY()
 	EEasingType EaseType;
@@ -277,6 +290,12 @@ public:
 
 	UPROPERTY()
 	float Duration;
+
+	UPROPERTY()
+	float From;
+
+	UPROPERTY()
+	float To;
 
 	UPROPERTY()
 	float ElapsedTime;
@@ -298,10 +317,12 @@ public:
 
 	UWorld* GetWorld() const override;
 
-	void AddTween(const FMKTweenDataStruct& NewTween);
+	int32 AddTween(FMKTweenDataStruct& NewTween);
+	void StopTween(int32 TweenID);
 
 private:
 	static UMKTweenManager* Instance;
 
 	TArray<FMKTweenDataStruct> ActiveTweens;
+	int32 TweenCounter;
 };

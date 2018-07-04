@@ -319,42 +319,42 @@ bool UMKUE4UtilityLibrary::WorldPointIsInsideBox(const FVector& WorldPoint, cons
 
 
 /** Easing functions */
-const float UMKUE4UtilityLibrary::EaseInterpolate(const EasingType EaseType, const float NormalizedTime, const float From, const float To)
+const float UMKUE4UtilityLibrary::EaseInterpolate(const EEasingType EaseType, const float NormalizedTime, const float From, const float To)
 {
 	switch (EaseType)
 	{
 		default:
-		case ET_Linear: return EaseLinear(NormalizedTime, From, To);
-		case ET_SineIn: return EaseSineIn(NormalizedTime, From, To);
-		case ET_SineOut: return EaseSineOut(NormalizedTime, From, To);
-		case ET_SineInOut: return EaseSineInOut(NormalizedTime, From, To);
-		case ET_QuadIn: return EaseQuadIn(NormalizedTime, From, To);
-		case ET_QuadOut: return EaseQuadOut(NormalizedTime, From, To);
-		case ET_QuadInOut: return EaseQuadInOut(NormalizedTime, From, To);
-		case ET_CubicIn: return EaseCubicIn(NormalizedTime, From, To);
-		case ET_CubicOut: return EaseCubicOut(NormalizedTime, From, To);
-		case ET_CubicInOut: return EaseCubicInOut(NormalizedTime, From, To);
-		case ET_QuartIn: return EaseQuartIn(NormalizedTime, From, To);
-		case ET_QuartOut: return EaseQuartOut(NormalizedTime, From, To);
-		case ET_QuartInOut: return EaseQuartInOut(NormalizedTime, From, To);
-		case ET_QuintIn: return EaseQuintIn(NormalizedTime, From, To);
-		case ET_QuintOut: return EaseQuintOut(NormalizedTime, From, To);
-		case ET_QuintInOut: return EaseQuintInOut(NormalizedTime, From, To);
-		case ET_ExpoIn: return EaseExpoIn(NormalizedTime, From, To);
-		case ET_ExpoOut: return EaseExpoOut(NormalizedTime, From, To);
-		case ET_ExpoInOut: return EaseExpoInOut(NormalizedTime, From, To);
-		case ET_CircIn: return EaseCircIn(NormalizedTime, From, To);
-		case ET_CircOut: return EaseCircOut(NormalizedTime, From, To);
-		case ET_CircInOut: return EaseCircInOut(NormalizedTime, From, To);
-		case ET_BackIn: return EaseBackIn(NormalizedTime, From, To);
-		case ET_BackOut: return EaseBackOut(NormalizedTime, From, To);
-		case ET_BackInOut: return EaseBackInOut(NormalizedTime, From, To);
-		case ET_ElasticIn: return EaseElasticIn(NormalizedTime, From, To);
-		case ET_ElasticOut: return EaseElasticOut(NormalizedTime, From, To);
-		case ET_ElasticInOut: return EaseElasticInOut(NormalizedTime, From, To);
-		case ET_BounceIn: return EaseBounceIn(NormalizedTime, From, To);
-		case ET_BounceOut: return EaseBounceOut(NormalizedTime, From, To);
-		case ET_BounceInOut: return EaseBounceInOut(NormalizedTime, From, To);
+	case EEasingType::Linear: return EaseLinear(NormalizedTime, From, To);
+	case EEasingType::SineIn: return EaseSineIn(NormalizedTime, From, To);
+	case EEasingType::SineOut: return EaseSineOut(NormalizedTime, From, To);
+	case EEasingType::SineInOut: return EaseSineInOut(NormalizedTime, From, To);
+	case EEasingType::QuadIn: return EaseQuadIn(NormalizedTime, From, To);
+	case EEasingType::QuadOut: return EaseQuadOut(NormalizedTime, From, To);
+	case EEasingType::QuadInOut: return EaseQuadInOut(NormalizedTime, From, To);
+	case EEasingType::CubicIn: return EaseCubicIn(NormalizedTime, From, To);
+	case EEasingType::CubicOut: return EaseCubicOut(NormalizedTime, From, To);
+	case EEasingType::CubicInOut: return EaseCubicInOut(NormalizedTime, From, To);
+	case EEasingType::QuartIn: return EaseQuartIn(NormalizedTime, From, To);
+	case EEasingType::QuartOut: return EaseQuartOut(NormalizedTime, From, To);
+	case EEasingType::QuartInOut: return EaseQuartInOut(NormalizedTime, From, To);
+	case EEasingType::QuintIn: return EaseQuintIn(NormalizedTime, From, To);
+	case EEasingType::QuintOut: return EaseQuintOut(NormalizedTime, From, To);
+	case EEasingType::QuintInOut: return EaseQuintInOut(NormalizedTime, From, To);
+	case EEasingType::ExpoIn: return EaseExpoIn(NormalizedTime, From, To);
+	case EEasingType::ExpoOut: return EaseExpoOut(NormalizedTime, From, To);
+	case EEasingType::ExpoInOut: return EaseExpoInOut(NormalizedTime, From, To);
+	case EEasingType::CircIn: return EaseCircIn(NormalizedTime, From, To);
+	case EEasingType::CircOut: return EaseCircOut(NormalizedTime, From, To);
+	case EEasingType::CircInOut: return EaseCircInOut(NormalizedTime, From, To);
+	case EEasingType::BackIn: return EaseBackIn(NormalizedTime, From, To);
+	case EEasingType::BackOut: return EaseBackOut(NormalizedTime, From, To);
+	case EEasingType::BackInOut: return EaseBackInOut(NormalizedTime, From, To);
+	case EEasingType::ElasticIn: return EaseElasticIn(NormalizedTime, From, To);
+	case EEasingType::ElasticOut: return EaseElasticOut(NormalizedTime, From, To);
+	case EEasingType::ElasticInOut: return EaseElasticInOut(NormalizedTime, From, To);
+	case EEasingType::BounceIn: return EaseBounceIn(NormalizedTime, From, To);
+	case EEasingType::BounceOut: return EaseBounceOut(NormalizedTime, From, To);
+	case EEasingType::BounceInOut: return EaseBounceInOut(NormalizedTime, From, To);
 	}
 }
 
@@ -603,3 +603,85 @@ const float UMKUE4UtilityLibrary::EaseBounceInOut(const float NormalizedTime, co
 
 	return From + (To - From) * x;
 }
+
+
+void UMKUE4UtilityLibrary::TweenCustom(const EEasingType EaseType, float Duration, const FMKTweenFunction& TweenFunction)
+{
+	UMKTweenManager::Get().AddTween(FMKTweenDataStruct(EaseType, Duration, TweenFunction));
+}
+
+template<typename T>
+FString UMKUE4UtilityLibrary::EnumToString(const FString& enumName, const T value)
+{
+	UEnum* pEnum = FindObject<UEnum>(ANY_PACKAGE, *enumName, true);
+	return pEnum
+		? pEnum->GetDisplayNameTextByIndex(static_cast<uint8>(value)).ToString()
+		: TEXT("<invalid>");
+}
+
+UMKTweenManager& UMKTweenManager::Get()
+{
+	if (Instance == nullptr || !Instance->IsValidLowLevel())
+	{
+		Instance = NewObject<UMKTweenManager>((UObject*)GetTransientPackage(), FName("MKTweenManager"), RF_MarkAsRootSet);
+	}
+	return *Instance;
+}
+
+void UMKTweenManager::Tick(float DeltaTime)
+{
+	for (int32 i = 0; i < ActiveTweens.Num(); i++)
+	{
+		FMKTweenDataStruct& data = ActiveTweens[i];
+		if (!data.TweenFunction.IsBound())
+		{
+			ActiveTweens.RemoveAt(i);
+			i--;
+			continue;
+		}
+
+		float newElapsedTime = FMath::Min(data.Duration, data.ElapsedTime + DeltaTime);
+		data.ElapsedTime = newElapsedTime;
+		float t = UMKUE4UtilityLibrary::EaseInterpolate(data.EaseType, newElapsedTime / data.Duration, 0.0f, 1.0f);
+		data.TweenFunction.Execute(t);
+
+		if (newElapsedTime >= data.Duration)
+		{
+			// Tween done
+			ActiveTweens.RemoveAt(i);
+			i--;
+		}
+	}
+}
+
+bool UMKTweenManager::IsTickable() const
+{
+	return true;
+}
+
+bool UMKTweenManager::IsTickableInEditor() const
+{
+	return false;
+}
+
+bool UMKTweenManager::IsTickableWhenPaused() const
+{
+	return false;
+}
+
+TStatId UMKTweenManager::GetStatId() const
+{
+	return TStatId();
+}
+
+UWorld* UMKTweenManager::GetWorld() const
+{
+	return GetOuter()->GetWorld();
+}
+
+void UMKTweenManager::AddTween(const FMKTweenDataStruct& NewTween)
+{
+	ActiveTweens.Add(NewTween);
+}
+
+UMKTweenManager* UMKTweenManager::Instance;

@@ -4,40 +4,42 @@
 #include "MKUE4UtilitiesLibrary.generated.h"
 
 UENUM(BlueprintType)
-enum EasingType
+enum class EEasingType : uint8
 {
-	ET_Linear UMETA(DisplayName = "Linear"),
-	ET_SineIn UMETA(DisplayName = "Sine In"),
-	ET_SineOut UMETA(DisplayName = "Sine Out"),
-	ET_SineInOut UMETA(DisplayName = "Sine In Out"),
-	ET_QuadIn UMETA(DisplayName = "Quad In"),
-	ET_QuadOut UMETA(DisplayName = "Quad Out"),
-	ET_QuadInOut UMETA(DisplayName = "Quad In Out"),
-	ET_CubicIn UMETA(DisplayName = "Cubic In"),
-	ET_CubicOut UMETA(DisplayName = "Cubic Out"),
-	ET_CubicInOut UMETA(DisplayName = "Cubic In Out"),
-	ET_QuartIn UMETA(DisplayName = "Quartic In"),
-	ET_QuartOut UMETA(DisplayName = "Quartic Out"),
-	ET_QuartInOut UMETA(DisplayName = "Quartic In Out"),
-	ET_QuintIn UMETA(DisplayName = "Quintic In"),
-	ET_QuintOut UMETA(DisplayName = "Quintic Out"),
-	ET_QuintInOut UMETA(DisplayName = "Quintic In Out"),
-	ET_ExpoIn UMETA(DisplayName = "Exponential In"),
-	ET_ExpoOut UMETA(DisplayName = "Exponential Out"),
-	ET_ExpoInOut UMETA(DisplayName = "Exponential In Out"),
-	ET_CircIn UMETA(DisplayName = "Circular In"),
-	ET_CircOut UMETA(DisplayName = "Circular Out"),
-	ET_CircInOut UMETA(DisplayName = "Circular In Out"),
-	ET_BackIn UMETA(DisplayName = "Back In"),
-	ET_BackOut UMETA(DisplayName = "Back Out"),
-	ET_BackInOut UMETA(DisplayName = "Back In Out"),
-	ET_ElasticIn UMETA(DisplayName = "Elastic In"),
-	ET_ElasticOut UMETA(DisplayName = "Elastic Out"),
-	ET_ElasticInOut UMETA(DisplayName = "Elastic In Out"),
-	ET_BounceIn UMETA(DisplayName = "Bounce In"),
-	ET_BounceOut UMETA(DisplayName = "Bounce Out"),
-	ET_BounceInOut UMETA(DisplayName = "Bounce In Out")
+	Linear UMETA(DisplayName = "Linear"),
+	SineIn UMETA(DisplayName = "Sine In"),
+	SineOut UMETA(DisplayName = "Sine Out"),
+	SineInOut UMETA(DisplayName = "Sine In Out"),
+	QuadIn UMETA(DisplayName = "Quad In"),
+	QuadOut UMETA(DisplayName = "Quad Out"),
+	QuadInOut UMETA(DisplayName = "Quad In Out"),
+	CubicIn UMETA(DisplayName = "Cubic In"),
+	CubicOut UMETA(DisplayName = "Cubic Out"),
+	CubicInOut UMETA(DisplayName = "Cubic In Out"),
+	QuartIn UMETA(DisplayName = "Quartic In"),
+	QuartOut UMETA(DisplayName = "Quartic Out"),
+	QuartInOut UMETA(DisplayName = "Quartic In Out"),
+	QuintIn UMETA(DisplayName = "Quintic In"),
+	QuintOut UMETA(DisplayName = "Quintic Out"),
+	QuintInOut UMETA(DisplayName = "Quintic In Out"),
+	ExpoIn UMETA(DisplayName = "Exponential In"),
+	ExpoOut UMETA(DisplayName = "Exponential Out"),
+	ExpoInOut UMETA(DisplayName = "Exponential In Out"),
+	CircIn UMETA(DisplayName = "Circular In"),
+	CircOut UMETA(DisplayName = "Circular Out"),
+	CircInOut UMETA(DisplayName = "Circular In Out"),
+	BackIn UMETA(DisplayName = "Back In"),
+	BackOut UMETA(DisplayName = "Back Out"),
+	BackInOut UMETA(DisplayName = "Back In Out"),
+	ElasticIn UMETA(DisplayName = "Elastic In"),
+	ElasticOut UMETA(DisplayName = "Elastic Out"),
+	ElasticInOut UMETA(DisplayName = "Elastic In Out"),
+	BounceIn UMETA(DisplayName = "Bounce In"),
+	BounceOut UMETA(DisplayName = "Bounce Out"),
+	BounceInOut UMETA(DisplayName = "Bounce In Out")
 };
+
+DECLARE_DYNAMIC_DELEGATE_OneParam(FMKTweenFunction, float, NormalizedTime);
 
 UCLASS()
 class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
@@ -76,7 +78,6 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 
 		ShuffleArrayWithStream_impl(ArrayAddr, ArrayProperty, Stream);
 	}
-	
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Mouse Position", Keywords = "Set Mouse Position"), Category = "MK Utilities")
 	static bool SetMousePosition(APlayerController* PC, const float& PosX, const float& PosY);
@@ -145,7 +146,7 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 	/** Easing functions */
 
 	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
-	static const float EaseInterpolate(const EasingType EaseType, const float NormalizedTime, const float From, const float To);
+	static const float EaseInterpolate(const EEasingType EaseType, const float NormalizedTime, const float From, const float To);
 
 	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
 	static const float EaseLinear(const float NormalizedTime, const float From, const float To);
@@ -239,4 +240,68 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
 	static const float EaseBounceInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween"/*, meta = (WorldContext = "WorldContextObject")*/)
+	static void TweenCustom(const EEasingType EaseType, float Duration, const FMKTweenFunction& TweenFunction);
+
+
+	/** C++ only functions */
+
+	template<typename T>
+	static FString EnumToString(const FString& enumName, const T value);
+};
+
+USTRUCT()
+struct MKUE4UTILITIES_API FMKTweenDataStruct
+{
+	GENERATED_BODY()
+
+public:
+
+	FMKTweenDataStruct()
+	{
+	}
+
+	FMKTweenDataStruct(EEasingType EaseType, float Duration, FMKTweenFunction TweenFunction)
+		: EaseType(EaseType),
+		Duration(Duration),
+		TweenFunction(TweenFunction)
+	{
+	}
+
+	UPROPERTY()
+	EEasingType EaseType;
+
+	UPROPERTY()
+	FMKTweenFunction TweenFunction;
+
+	UPROPERTY()
+	float Duration;
+
+	UPROPERTY()
+	float ElapsedTime;
+};
+
+UCLASS()
+class MKUE4UTILITIES_API UMKTweenManager : public UObject, public FTickableGameObject
+{
+	GENERATED_BODY()
+
+public:
+	static UMKTweenManager& Get();
+
+	void Tick(float DeltaTime) override;
+	bool IsTickable() const override;
+	bool IsTickableInEditor() const override;
+	bool IsTickableWhenPaused() const override;
+	TStatId GetStatId() const override;
+
+	UWorld* GetWorld() const override;
+
+	void AddTween(const FMKTweenDataStruct& NewTween);
+
+private:
+	static UMKTweenManager* Instance;
+
+	TArray<FMKTweenDataStruct> ActiveTweens;
 };

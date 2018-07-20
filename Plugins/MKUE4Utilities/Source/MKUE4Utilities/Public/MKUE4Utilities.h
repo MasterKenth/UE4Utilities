@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "ModuleManager.h"
+#include "Core/Public/Modules/ModuleManager.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(MKUE4UtilitiesLog, Log, All);
 

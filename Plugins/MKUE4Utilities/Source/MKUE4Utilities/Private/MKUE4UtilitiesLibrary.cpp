@@ -57,7 +57,7 @@ float UMKUE4UtilityLibrary::GetActorLastRenderTime(AActor * RefActor)
 bool UMKUE4UtilityLibrary::WasActorRenderedRecently(AActor* RefActor, float MaxRecentTime)
 {
 	float RenderTime = GetActorLastRenderTime(RefActor) + MaxRecentTime;
-	float TimeSinceStartup = UGameplayStatics::GetRealTimeSeconds(RefActor->GetWorld());
+	float TimeSinceStartup = UGameplayStatics::GetTimeSeconds(RefActor->GetWorld());
 	return (RenderTime >= TimeSinceStartup);
 }
 

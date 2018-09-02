@@ -704,7 +704,8 @@ void UMKTweenManager::StopTween(int32 TweenID)
 		}
 	}
 
-	UE_LOG(MKUE4UtilitiesLog, Log, TEXT("Unable to find tween with id %d (might have expired)"), TweenID);
+	// Tween ID invalid (probably expired, which is common in the standard usage)
+	//UE_LOG(MKUE4UtilitiesLog, Log, TEXT("Unable to find tween with id %d (might have expired)"), TweenID);
 }
 
 UMKTweenManager* UMKTweenManager::Instance;

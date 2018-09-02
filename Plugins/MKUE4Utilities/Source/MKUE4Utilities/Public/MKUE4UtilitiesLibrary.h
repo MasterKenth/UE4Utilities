@@ -270,7 +270,8 @@ public:
 		Duration(Duration),
 		From(From),
 		To(To),
-		TweenFunction(TweenFunction)
+		TweenFunction(TweenFunction),
+		ElapsedTime(0)
 	{
 	}
 

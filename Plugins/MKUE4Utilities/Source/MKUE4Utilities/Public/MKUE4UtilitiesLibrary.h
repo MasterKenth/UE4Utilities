@@ -36,7 +36,18 @@ enum class EEasingType : uint8
 	ElasticInOut UMETA(DisplayName = "Elastic In Out"),
 	BounceIn UMETA(DisplayName = "Bounce In"),
 	BounceOut UMETA(DisplayName = "Bounce Out"),
-	BounceInOut UMETA(DisplayName = "Bounce In Out")
+	BounceInOut UMETA(DisplayName = "Bounce In Out"),
+
+	SineOutIn UMETA(DisplayName = "Sine Out In"),
+	QuadOutIn UMETA(DisplayName = "Quad Out In"),
+	CubicOutIn UMETA(DisplayName = "Cubic Out In"),
+	QuartOutIn UMETA(DisplayName = "Quartic Out In"),
+	QuintOutIn UMETA(DisplayName = "Quintic Out In"),
+	ExpoOutIn UMETA(DisplayName = "Exponential Out In"),
+	CircOutIn UMETA(DisplayName = "Circular Out In"),
+	BackOutIn UMETA(DisplayName = "Back Out In"),
+	ElasticOutIn UMETA(DisplayName = "Elastic Out In"),
+	BounceOutIn UMETA(DisplayName = "Bounce Out In"),
 };
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FMKTweenFunction, float, TweenedValue);
@@ -240,6 +251,37 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
 	static const float EaseBounceInOut(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseSineOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseQuadOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseCubicOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseQuartOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseQuintOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseExpoOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseCircOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseBackOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseElasticOutIn(const float NormalizedTime, const float From, const float To);
+
+	UFUNCTION(BlueprintPure, Category = "MK Utilities|Math|Easing")
+		static const float EaseBounceOutIn(const float NormalizedTime, const float From, const float To);
+
 
 	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween"/*, meta = (WorldContext = "WorldContextObject")*/)
 	static int32 TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenFunction& TweenFunction);

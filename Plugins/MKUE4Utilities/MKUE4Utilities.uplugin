@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 6,
-	"VersionName": "1.6.20",
+	"VersionName": "1.7.20",
 	"FriendlyName": "MK's UE4 Utilities",
 	"Description": "Personal UE4 utilities library",
 	"Category": "Misc",

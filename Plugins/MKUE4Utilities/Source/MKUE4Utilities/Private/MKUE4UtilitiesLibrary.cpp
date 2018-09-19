@@ -355,6 +355,16 @@ const float UMKUE4UtilityLibrary::EaseInterpolate(const EEasingType EaseType, co
 	case EEasingType::BounceIn: return EaseBounceIn(NormalizedTime, From, To);
 	case EEasingType::BounceOut: return EaseBounceOut(NormalizedTime, From, To);
 	case EEasingType::BounceInOut: return EaseBounceInOut(NormalizedTime, From, To);
+	case EEasingType::SineOutIn: return EaseSineOutIn(NormalizedTime, From, To);
+	case EEasingType::QuadOutIn: return EaseQuadOutIn(NormalizedTime, From, To);
+	case EEasingType::CubicOutIn: return EaseCubicOutIn(NormalizedTime, From, To);
+	case EEasingType::QuartOutIn: return EaseQuartOutIn(NormalizedTime, From, To);
+	case EEasingType::QuintOutIn: return EaseQuintOutIn(NormalizedTime, From, To);
+	case EEasingType::ExpoOutIn: return EaseExpoOutIn(NormalizedTime, From, To);
+	case EEasingType::CircOutIn: return EaseCircOutIn(NormalizedTime, From, To);
+	case EEasingType::BackOutIn: return EaseBackOutIn(NormalizedTime, From, To);
+	case EEasingType::ElasticOutIn: return EaseElasticOutIn(NormalizedTime, From, To);
+	case EEasingType::BounceOutIn: return EaseBounceOutIn(NormalizedTime, From, To);
 	}
 }
 
@@ -603,6 +613,58 @@ const float UMKUE4UtilityLibrary::EaseBounceInOut(const float NormalizedTime, co
 
 	return From + (To - From) * x;
 }
+
+
+const float UMKUE4UtilityLibrary::EaseSineOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseSineOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseSineIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuadOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseQuadOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseQuadIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseCubicOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseCubicOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseCubicIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuartOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseQuartOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseQuartIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseQuintOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseQuintOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseQuintIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseExpoOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseExpoOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseExpoIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseCircOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseCircOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseCircIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseBackOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseBackOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseBackIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseElasticOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseElasticOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseElasticIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
+const float UMKUE4UtilityLibrary::EaseBounceOutIn(const float NormalizedTime, const float From, const float To)
+{
+	return NormalizedTime < 0.5f ? EaseBounceOut(NormalizedTime * 2, From, FMath::Lerp(From, To, 0.5f)) : EaseBounceIn((NormalizedTime - 0.5f) * 2, FMath::Lerp(From, To, 0.5f), To);
+}
+
 
 int32 UMKUE4UtilityLibrary::TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenFunction& TweenFunction)
 {

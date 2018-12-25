@@ -90,6 +90,17 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 		ShuffleArrayWithStream_impl(ArrayAddr, ArrayProperty, Stream);
 	}
 
+	// C++ version of simple array shuffle
+	template<typename T>
+	FORCEINLINE static void ShuffleArray(TArray<T>& TargetArray)
+	{
+		for (int32 i = TargetArray.Num() - 1; i >= 0; i--)
+		{
+			int32 r = FMath::RandRange(0, TargetArray.Num() - 1);
+			if (i != r) TargetArray.Swap(i, r);
+		}
+	}
+
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Mouse Position", Keywords = "Set Mouse Position"), Category = "MK Utilities")
 	static bool SetMousePosition(APlayerController* PC, const float& PosX, const float& PosY);
 

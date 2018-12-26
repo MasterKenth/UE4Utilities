@@ -666,9 +666,15 @@ const float UMKUE4UtilityLibrary::EaseBounceOutIn(const float NormalizedTime, co
 }
 
 
-int32 UMKUE4UtilityLibrary::TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenFunction& TweenFunction)
+int32 UMKUE4UtilityLibrary::TweenCustomBP(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenDynamicDelegate& TweenDelegate)
 {
-	FMKTweenDataStruct data(EaseType, Duration, From, To, TweenFunction);
+	FMKTweenDataStruct data(EaseType, Duration, From, To, FMKUnifiedDelegate(TweenDelegate));
+	return UMKTweenManager::Get().AddTween(data);
+}
+
+int32 UMKUE4UtilityLibrary::TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenDelegate& TweenDelegate)
+{
+	FMKTweenDataStruct data(EaseType, Duration, From, To, FMKUnifiedDelegate(TweenDelegate));
 	return UMKTweenManager::Get().AddTween(data);
 }
 
@@ -700,7 +706,7 @@ void UMKTweenManager::Tick(float DeltaTime)
 	for (int32 i = 0; i < ActiveTweens.Num(); i++)
 	{
 		FMKTweenDataStruct& data = ActiveTweens[i];
-		if (!data.TweenFunction.IsBound())
+		if (!data.TweenDelegate.IsBound())
 		{
 			ActiveTweens.RemoveAt(i);
 			i--;
@@ -712,7 +718,7 @@ void UMKTweenManager::Tick(float DeltaTime)
 		float val = FMath::Lerp(data.From, data.To, t);
 
 		data.ElapsedTime = newElapsedTime;
-		data.TweenFunction.Execute(val);
+		data.TweenDelegate.Execute(val);
 
 		if (newElapsedTime >= data.Duration)
 		{

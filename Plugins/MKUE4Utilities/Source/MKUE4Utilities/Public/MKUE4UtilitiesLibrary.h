@@ -50,7 +50,41 @@ enum class EEasingType : uint8
 	BounceOutIn UMETA(DisplayName = "Bounce Out In"),
 };
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FMKTweenFunction, float, TweenedValue);
+DECLARE_DELEGATE_OneParam(FMKTweenDelegate, float);
+DECLARE_DYNAMIC_DELEGATE_OneParam(FMKTweenDynamicDelegate, float, TweenedValue);
+
+struct FMKUnifiedDelegate
+{
+	FMKTweenDelegate FuncDelegate;
+	FMKTweenDynamicDelegate FuncDynDelegate;
+
+	FMKUnifiedDelegate() {};
+	FMKUnifiedDelegate(FMKTweenDelegate const& D) : FuncDelegate(D) {};
+	FMKUnifiedDelegate(FMKTweenDynamicDelegate const& D) : FuncDynDelegate(D) {};
+
+	inline void Execute(float val)
+	{
+		if (FuncDelegate.IsBound())
+		{
+			FuncDelegate.Execute(val);
+		}
+		else if (FuncDynDelegate.IsBound())
+		{
+			FuncDynDelegate.Execute(val);
+		}
+	}
+
+	inline bool IsBound() const
+	{
+		return (FuncDelegate.IsBound() || FuncDynDelegate.IsBound());
+	}
+
+	inline void Unbind()
+	{
+		FuncDelegate.Unbind();
+		FuncDynDelegate.Unbind();
+	}
+};
 
 UCLASS()
 class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
@@ -294,8 +328,10 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 		static const float EaseBounceOutIn(const float NormalizedTime, const float From, const float To);
 
 
-	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween"/*, meta = (WorldContext = "WorldContextObject")*/)
-	static int32 TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenFunction& TweenFunction);
+	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween", meta = (DisplayName = "Tween Custom"))
+	static int32 TweenCustomBP(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenDynamicDelegate& TweenDelegate);
+
+	static int32 TweenCustom(const EEasingType EaseType, float Duration, float From, float To, const FMKTweenDelegate& TweenDelegate);
 
 	UFUNCTION(BlueprintCallable, Category = "MK Utilities|Tween")
 	static void StopTween(int32 TweenID);
@@ -317,13 +353,13 @@ public:
 	{
 	}
 
-	FMKTweenDataStruct(EEasingType EaseType, float Duration, float From, float To, FMKTweenFunction TweenFunction)
+	FMKTweenDataStruct(EEasingType EaseType, float Duration, float From, float To, FMKUnifiedDelegate TweenDelegate)
 		: TweenID(-1),
 		EaseType(EaseType),
 		Duration(Duration),
 		From(From),
 		To(To),
-		TweenFunction(TweenFunction),
+		TweenDelegate(TweenDelegate),
 		ElapsedTime(0)
 	{
 	}
@@ -333,25 +369,12 @@ public:
 		return Other.TweenID == TweenID;
 	}
 
-	UPROPERTY()
 	int32 TweenID;
-
-	UPROPERTY()
 	EEasingType EaseType;
-
-	UPROPERTY()
-	FMKTweenFunction TweenFunction;
-
-	UPROPERTY()
+	FMKUnifiedDelegate TweenDelegate;
 	float Duration;
-
-	UPROPERTY()
 	float From;
-
-	UPROPERTY()
 	float To;
-
-	UPROPERTY()
 	float ElapsedTime;
 };
 

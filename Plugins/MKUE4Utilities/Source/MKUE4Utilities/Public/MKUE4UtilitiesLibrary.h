@@ -371,10 +371,10 @@ public:
 
 	int32 TweenID;
 	EEasingType EaseType;
-	FMKUnifiedDelegate TweenDelegate;
 	float Duration;
 	float From;
 	float To;
+	FMKUnifiedDelegate TweenDelegate;
 	float ElapsedTime;
 };
 

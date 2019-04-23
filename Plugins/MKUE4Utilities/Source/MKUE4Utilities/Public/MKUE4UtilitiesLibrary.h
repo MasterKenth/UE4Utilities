@@ -180,7 +180,7 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BluePrintPure, meta = (DisplayName = "Box Intersects Box", Keywords = "Box Intersect Box2D FBox2D"), Category = "MK Utilities")
 	static bool BoxIntersectsBox(const FBox2D& Box, const FBox2D& OtherBox);
 
-	UFUNCTION(BlueprintPure, meta = (DisplayName = "Min and Max of Array (float)", CommutativeAssociativeBinaryOperator = "true"), Category = "MK Utilities")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "Min and Max of Array (float)"), Category = "MK Utilities")
 	static void MinAndMaxOfFloatArray(const TArray<float>& Floats, float& Min, float& Max);
 
 	UFUNCTION(BlueprintPure, meta = (DisplayName = "Make Literal Box2D"), Category = "MK Utilities")

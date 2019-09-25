@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28315.86
+# Visual Studio 15
+VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{ECC57B61-E2F6-4000-93C1-45E5DAA9A422}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{8C130E3D-9856-4E68-B4A5-257590581678}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{0419E0CA-9F0A-4CBD-826E-E31EBA7AD056}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{72ED372B-0534-4B1F-B69B-F1B8681992CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{C90A6D61-1E2A-4EC7-91CC-2760FE080AEA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MKUE4UtilitiesProj", "Intermediate\ProjectFiles\MKUE4UtilitiesProj.vcxproj", "{D1CC095E-E59E-4AC5-98CB-5A23F209D0AA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{5F1DEA3D-0A91-4019-AFC4-74BEF7DDF9BF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{C0543D6E-4BD4-4F47-8B11-DCF0FA7C5512}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis
+		..\..\..\..\..\Program Files\Epic Games\UE_4.23\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\Program Files\Epic Games\UE_4.23\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
 EndProject
 Global
@@ -63,7 +63,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C90A6D61-1E2A-4EC7-91CC-2760FE080AEA} = {ECC57B61-E2F6-4000-93C1-45E5DAA9A422}
-		{D1CC095E-E59E-4AC5-98CB-5A23F209D0AA} = {0419E0CA-9F0A-4CBD-826E-E31EBA7AD056}
+		{C90A6D61-1E2A-4EC7-91CC-2760FE080AEA} = {8C130E3D-9856-4E68-B4A5-257590581678}
+		{D1CC095E-E59E-4AC5-98CB-5A23F209D0AA} = {72ED372B-0534-4B1F-B69B-F1B8681992CE}
 	EndGlobalSection
 EndGlobal

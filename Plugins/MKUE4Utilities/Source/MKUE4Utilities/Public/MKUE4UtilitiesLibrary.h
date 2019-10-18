@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Engine.h"
+#include "SlateCore\Public\Styling\SlateBrush.h"
+#include <PaperSprite.h>
 #include "MKUE4UtilitiesLibrary.generated.h"
 
 UENUM(BlueprintType)
@@ -134,6 +136,9 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 			if (i != r) TargetArray.Swap(i, r);
 		}
 	}
+
+	UFUNCTION(BlueprintPure, meta = (DisplayName = ""), Category = "MK Utilities")
+	static FSlateBrush MakeBrushFromSprite(UPaperSprite* Sprite, int32 Width, int32 Height);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Mouse Position", Keywords = "Set Mouse Position"), Category = "MK Utilities")
 	static bool SetMousePosition(APlayerController* PC, const float& PosX, const float& PosY);

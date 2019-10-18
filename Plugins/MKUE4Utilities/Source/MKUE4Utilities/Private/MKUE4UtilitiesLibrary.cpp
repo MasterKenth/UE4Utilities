@@ -28,6 +28,14 @@ void UMKUE4UtilityLibrary::ShuffleArrayWithStream_impl(void* TargetArray, const 
 	}
 }
 
+FSlateBrush UMKUE4UtilityLibrary::MakeBrushFromSprite(UPaperSprite* Sprite, int32 Width, int32 Height)
+{
+	FSlateBrush Brush;
+	Brush.SetResourceObject(Sprite);
+	if (Width > 0 && Height > 0) Brush.ImageSize = FVector2D(Width, Height);
+	return Brush;
+}
+
 bool UMKUE4UtilityLibrary::SetMousePosition(APlayerController* PC, const float& PosX, const float& PosY)
 {
 	if (!PC) return false;

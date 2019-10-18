@@ -31,6 +31,9 @@ public class MKUE4Utilities : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "UMG",
+                "Paper2D",
+                "Slate",
+                "SlateCore"
                 //"Kismet",
                 //"InputCore",
 			}
@@ -40,14 +43,15 @@ public class MKUE4Utilities : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
             {
+                "Paper2D",
                 //"Core",
                 //"CoreUObject",
 				//"Engine",
                 //"UMG",
                 //"Kismet",
                 //"InputCore",
-                //"Slate",
-				//"SlateCore",
+                "Slate",
+				"SlateCore",
 			}
 			);
 		

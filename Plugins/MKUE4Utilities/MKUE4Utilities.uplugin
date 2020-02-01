@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 6,
-	"VersionName": "1.10.23",
+	"VersionName": "1.11.23",
 	"FriendlyName": "MK's UE4 Utilities",
 	"Description": "Personal UE4 utilities library",
 	"Category": "Misc",
@@ -14,12 +14,6 @@
 	"CanContainContent": false,
 	"IsBetaVersion": false,
 	"Installed": false,
-	"Plugins": [
-		{
-			"Name": "Paper2D",
-			"Enabled": true
-		}
-	],
 	"Modules": [
 		{
 			"Name": "MKUE4Utilities",
@@ -33,6 +27,12 @@
 			"BlacklistPlatforms": [
 				"IOS"
 			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Paper2D",
+			"Enabled": true
 		}
 	]
 }

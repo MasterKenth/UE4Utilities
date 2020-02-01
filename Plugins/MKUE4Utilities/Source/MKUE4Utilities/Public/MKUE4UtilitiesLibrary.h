@@ -344,7 +344,13 @@ class MKUE4UTILITIES_API UMKUE4UtilityLibrary : public UBlueprintFunctionLibrary
 	/** C++ only functions */
 
 	template<typename T>
-	static FString EnumToString(const FString& enumName, const T value);
+	static FString EnumToString(const FString& enumName, const T value)
+	{
+		UEnum* pEnum = FindObject<UEnum>(ANY_PACKAGE, *enumName, true);
+		return pEnum
+			? pEnum->GetDisplayNameTextByIndex(static_cast<uint8>(value)).ToString()
+			: TEXT("<invalid>");
+	}
 };
 
 USTRUCT()

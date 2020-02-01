@@ -691,15 +691,6 @@ void UMKUE4UtilityLibrary::StopTween(int32 TweenID)
 	UMKTweenManager::Get().StopTween(TweenID);
 }
 
-template<typename T>
-FString UMKUE4UtilityLibrary::EnumToString(const FString& enumName, const T value)
-{
-	UEnum* pEnum = FindObject<UEnum>(ANY_PACKAGE, *enumName, true);
-	return pEnum
-		? pEnum->GetDisplayNameTextByIndex(static_cast<uint8>(value)).ToString()
-		: TEXT("<invalid>");
-}
-
 UMKTweenManager& UMKTweenManager::Get()
 {
 	if (Instance == nullptr || !Instance->IsValidLowLevel())
